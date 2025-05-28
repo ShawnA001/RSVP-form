@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Get Ready to Laugh! RSVP for the KLM Show at the Cape Town Funny Festival!</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: url('Air-France-KLM-Airus-A350.jpg') no-repeat center center fixed;
+      background-size: cover;
+      margin: 0;
+      padding: 0;
+      color: #fff;
+    }
+
+    .container {
+      background: rgba(0, 102, 204, 0.85);
+      max-width: 600px;
+      margin: 100px auto;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    }
+
+    h1 {
+      text-align: center;
+      color: #fff;
+    }
+
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: none;
+      border-radius: 8px;
+    }
+
+    button {
+      margin-top: 20px;
+      background-color: #ffcc00;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 10px;
+      font-size: 16px;
+      color: #003399;
+      cursor: pointer;
+    }
+
+    .success {
+      margin-top: 15px;
+      color: #00ffcc;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>✈️ Get Ready to Laugh! RSVP for the KLM Show at the Cape Town Funny Festival ✈️</h1>
+    <form id="rsvpForm">
+      <label for="name">Full Name</label>
+      <input type="text" id="name" name="name" required/>
+
+      <label for="email">Email Address</label>
+      <input type="email" id="email" name="email" required/>
+
+      <label for="attendance">Are you attending?</label>
+      <select id="attendance" name="attendance" required>
+        <option value="">-- Select One --</option>
+        <option value="Yes, I'll be there.">Yes</option>
+        <option value="Sorry, I can't make it.">No</option>
+      </select>
+
+      <label for="bringingGuest">Will you be attending with a guest?</label>
+      <select id="bringingGuest" name="bringingGuest" required>
+        <option value="">-- Select One --</option>
+        <option value="Yes">Yes</option>
+        <option value="No">No</option>
+      </select>
+
+      <label for="diet">Do you or your guest have any dietary restrictions?</label>
+      <textarea id="diet" name="diet" rows="3" placeholder="e.g., vegetarian, gluten-free, etc."></textarea>
+
+      <button type="submit">Submit RSVP</button>
+      <p class="success" id="successMessage" style="display:none;">Thank you for your RSVP! ✈️</p>
+    </form>
+  </div>
+
+  <script>
+    document.getElementById('rsvpForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const attendance = document.getElementById('attendance').value;
+      const bringingGuest = document.getElementById('bringingGuest').value;
+      const diet = document.getElementById('diet').value;
+
+      fetch('https://script.google.com/macros/s/AKfycbzfO0zoTt-3cmNnhPY3kQojm7dz8HAneldjzY6V-Kkp8sBxu38kzl1B_vRkbMkYJQ7Q/exec', {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          name,
+          email,
+          attendance,
+          bringingGuest,
+          diet
+        })
+      });
+
+      document.getElementById('successMessage').style.display = 'block';
+      document.getElementById('rsvpForm').reset();
+    });
+  </script>
+</body>
+</html>
